@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>知恵談会 — 神社の縁側で、世代を超えて</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600;800&family=Noto+Serif+JP:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --text-primary: #1a1a18;
+    --text-secondary: #5a5a56;
+    --text-tertiary: #9a9a94;
+    --bg-primary: #fdfcf8;
+    --bg-secondary: #f5f3ee;
+    --border: rgba(0,0,0,0.1);
+    --border-mid: rgba(0,0,0,0.18);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --text-primary: #e8e6df;
+      --text-secondary: #a8a69f;
+      --text-tertiary: #6a6860;
+      --bg-primary: #181816;
+      --bg-secondary: #222220;
+      --border: rgba(255,255,255,0.1);
+      --border-mid: rgba(255,255,255,0.18);
+    }
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Noto Serif JP', serif;
+    color: var(--text-primary);
+    background: var(--bg-primary);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 3rem;
+    border-bottom: 0.5px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: var(--bg-primary);
+    z-index: 100;
+  }
+
+  .nav-logo {
+    font-family: 'Shippori Mincho B1', serif;
+    font-size: 20px;
+    letter-spacing: 0.2em;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .nav-sub {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    letter-spacing: 0.25em;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    padding: 7rem 3rem 6rem;
+    text-align: center;
+    border-bottom: 0.5px solid var(--border);
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.045;
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    color: var(--text-tertiary);
+    margin-bottom: 2.5rem;
+  }
+
+  h1 {
+    font-family: 'Shippori Mincho B1', serif;
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+  }
+
+  .h1-en {
+    display: block;
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 0.35em;
+    color: var(--text-tertiary);
+    margin-top: 1rem;
+    font-family: 'Noto Serif JP', serif;
+  }
+
+  .hero-body {
+    font-size: 14px;
+    line-height: 2.4;
+    color: var(--text-secondary);
+    max-width: 520px;
+    margin: 0 auto;
+    letter-spacing: 0.05em;
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 5rem 3rem;
+    border-bottom: 0.5px solid var(--border);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  section.full {
+    max-width: 100%;
+    padding: 5rem 3rem;
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  section.full-inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  section.alt {
+    max-width: 100%;
+    background: var(--bg-secondary);
+    padding: 5rem 3rem;
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  section.alt .full-inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--text-tertiary);
+    margin-bottom: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .section-label::before {
+    content: '';
+    width: 28px;
+    height: 0.5px;
+    background: var(--border-mid);
+    flex-shrink: 0;
+  }
+
+  h2 {
+    font-family: 'Shippori Mincho B1', serif;
+    font-size: clamp(20px, 3vw, 26px);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+  }
+
+  .body-text {
+    font-size: 14px;
+    line-height: 2.3;
+    color: var(--text-secondary);
+    letter-spacing: 0.04em;
+    max-width: 640px;
+  }
+
+  /* KNOWLEDGE SPLIT */
+  .split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    margin-top: 3rem;
+  }
+
+  @media (max-width: 600px) {
+    .split { grid-template-columns: 1fr; }
+  }
+
+  .split-block {
+    border-top: 0.5px solid var(--border-mid);
+    padding-top: 1.5rem;
+  }
+
+  .split-num {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--text-tertiary);
+    margin-bottom: 0.75rem;
+  }
+
+  .split-title {
+    font-family: 'Shippori Mincho B1', serif;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+  }
+
+  .split-body {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 2;
+  }
+
+  /* FLOW */
+  .flow {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    border: 0.5px solid var(--border);
+    margin-top: 3rem;
+  }
+
+  .flow-item {
+    padding: 2rem 1.5rem;
+    border-right: 0.5px solid var(--border);
+  }
+
+  .flow-item:last-child { border-right: none; }
+
+  @media (max-width: 600px) {
+    .flow { grid-template-columns: 1fr 1fr; }
+    .flow-item:nth-child(2) { border-right: none; }
+    .flow-item:nth-child(3) { border-right: 0.5px solid var(--border); border-top: 0.5px solid var(--border); }
+    .flow-item:nth-child(4) { border-right: none; border-top: 0.5px solid var(--border); }
+  }
+
+  .flow-num {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--text-tertiary);
+    margin-bottom: 1rem;
+  }
+
+  .flow-title {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.6rem;
+    line-height: 1.6;
+    color: var(--text-primary);
+  }
+
+  .flow-body {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.9;
+  }
+
+  /* THEMES */
+  .themes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 2rem;
+  }
+
+  .tag {
+    font-size: 12px;
+    padding: 7px 18px;
+    border: 0.5px solid var(--border-mid);
+    color: var(--text-secondary);
+    letter-spacing: 0.1em;
+    font-family: 'Noto Serif JP', serif;
+    background: transparent;
+  }
+
+  /* SAISEN */
+  .saisen-box {
+    background: var(--bg-primary);
+    border: 0.5px solid var(--border);
+    padding: 2.5rem;
+    margin-top: 2.5rem;
+    display: grid;
+    grid-template-columns: 52px 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  @media (max-width: 500px) {
+    .saisen-box { grid-template-columns: 1fr; }
+  }
+
+  .saisen-icon { opacity: 0.35; }
+
+  .saisen-title {
+    font-family: 'Shippori Mincho B1', serif;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+  }
+
+  .saisen-body {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 2.2;
+  }
+
+  /* VISION */
+  .vision-wrap {
+    padding: 6rem 3rem;
+    text-align: center;
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .vision-label {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--text-tertiary);
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+  }
+
+  .vision-label::before, .vision-label::after {
+    content: '';
+    width: 28px;
+    height: 0.5px;
+    background: var(--border-mid);
+  }
+
+  .vision-jp {
+    font-family: 'Shippori Mincho B1', serif;
+    font-size: clamp(16px, 2.5vw, 22px);
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    line-height: 2.6;
+    color: var(--text-primary);
+    margin-bottom: 3rem;
+  }
+
+  .vision-line {
+    width: 40px;
+    height: 0.5px;
+    background: var(--border-mid);
+    margin: 3rem auto;
+  }
+
+  .vision-en {
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    color: var(--text-tertiary);
+    line-height: 2.2;
+  }
+
+  /* RULES */
+  .rules {
+    margin-top: 2.5rem;
+    border-top: 0.5px solid var(--border);
+  }
+
+  .rule-item {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1.25rem 0;
+    border-bottom: 0.5px solid var(--border);
+    align-items: baseline;
+  }
+
+  .rule-num {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--text-tertiary);
+    flex-shrink: 0;
+    width: 32px;
+    font-family: 'Shippori Mincho B1', serif;
+  }
+
+  .rule-text {
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    line-height: 1.9;
+    color: var(--text-secondary);
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 4rem 3rem;
+    text-align: center;
+    border-top: 0.5px solid var(--border);
+  }
+
+  .footer-logo {
+    font-family: 'Shippori Mincho B1', serif;
+    font-size: 22px;
+    letter-spacing: 0.25em;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+  }
+
+  .footer-text {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    letter-spacing: 0.18em;
+    line-height: 2.4;
+  }
+
+  .footer-btn {
+    display: inline-block;
+    margin-top: 2.5rem;
+    padding: 14px 40px;
+    border: 0.5px solid var(--border-mid);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    font-family: 'Noto Serif JP', serif;
+    color: var(--text-primary);
+    background: transparent;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .footer-btn:hover { background: var(--bg-secondary); }
+
+  /* RESPONSIVE — TABLET */
+  @media (max-width: 768px) {
+    nav { padding: 1.25rem 2rem; }
+    .hero { padding: 5rem 2rem 4rem; }
+    section { padding: 4rem 2rem; }
+    section.alt { padding: 4rem 2rem; }
+    .vision-wrap { padding: 5rem 2rem; }
+    footer { padding: 3.5rem 2rem; }
+    .flow { grid-template-columns: 1fr 1fr; }
+    .flow-item:nth-child(2) { border-right: none; }
+    .flow-item:nth-child(3) { border-right: 0.5px solid var(--border); border-top: 0.5px solid var(--border); }
+    .flow-item:nth-child(4) { border-right: none; border-top: 0.5px solid var(--border); }
+  }
+
+  /* RESPONSIVE — MOBILE */
+  @media (max-width: 480px) {
+    nav {
+      padding: 1rem 1.25rem;
+    }
+    .nav-sub { display: none; }
+
+    .hero {
+      padding: 3.5rem 1.25rem 3rem;
+    }
+    .hero-bg svg { width: 280px; height: 280px; }
+    .hero-eyebrow { font-size: 10px; letter-spacing: 0.2em; margin-bottom: 1.5rem; }
+    .h1-en { font-size: 10px; letter-spacing: 0.2em; }
+    .hero-body { font-size: 13px; line-height: 2.2; }
+
+    section {
+      padding: 3rem 1.25rem;
+    }
+    section.alt { padding: 3rem 1.25rem; }
+
+    h2 {
+      font-size: 20px;
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+
+    .body-text { font-size: 13px; line-height: 2.1; }
+
+    .section-label { margin-bottom: 1.75rem; }
+
+    .split {
+      grid-template-columns: 1fr;
+      gap: 1.75rem;
+      margin-top: 2rem;
+    }
+
+    .flow {
+      grid-template-columns: 1fr;
+      margin-top: 2rem;
+    }
+    .flow-item {
+      border-right: none;
+      border-bottom: 0.5px solid var(--border);
+      padding: 1.5rem 1.25rem;
+    }
+    .flow-item:last-child { border-bottom: none; }
+    .flow-item:nth-child(2),
+    .flow-item:nth-child(3),
+    .flow-item:nth-child(4) {
+      border-right: none;
+      border-top: none;
+    }
+
+    .themes { gap: 8px; margin-top: 1.5rem; }
+    .tag { font-size: 11px; padding: 6px 14px; }
+
+    .saisen-box {
+      grid-template-columns: 1fr;
+      padding: 1.75rem 1.25rem;
+      gap: 1.25rem;
+    }
+    .saisen-icon { width: 36px; height: 36px; }
+
+    .vision-wrap { padding: 3.5rem 1.25rem; }
+    .vision-jp {
+      font-size: 16px;
+      line-height: 2.4;
+      letter-spacing: 0.1em;
+    }
+    .vision-en {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+    }
+
+    .rules { margin-top: 2rem; }
+    .rule-item { gap: 1rem; padding: 1rem 0; }
+    .rule-text { font-size: 13px; }
+
+    footer { padding: 3rem 1.25rem; }
+    .footer-logo { font-size: 18px; }
+    .footer-text { font-size: 11px; letter-spacing: 0.12em; }
+    .footer-btn {
+      padding: 12px 28px;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      width: 100%;
+      text-align: center;
+    }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">知恵談会</div>
+  <div class="nav-sub">CHIE DANKAI</div>
+</nav>
+
+<div class="hero">
+  <div class="hero-bg">
+    <svg width="480" height="480" viewBox="0 0 480 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="240" cy="240" r="238" stroke="currentColor" stroke-width="1"/>
+      <circle cx="240" cy="240" r="190" stroke="currentColor" stroke-width="1"/>
+      <circle cx="240" cy="240" r="140" stroke="currentColor" stroke-width="1"/>
+      <circle cx="240" cy="240" r="90" stroke="currentColor" stroke-width="1"/>
+      <circle cx="240" cy="240" r="44" stroke="currentColor" stroke-width="1"/>
+      <circle cx="240" cy="240" r="14" stroke="currentColor" stroke-width="1"/>
+      <line x1="240" y1="2" x2="240" y2="478" stroke="currentColor" stroke-width="0.7"/>
+      <line x1="2" y1="240" x2="478" y2="240" stroke="currentColor" stroke-width="0.7"/>
+      <line x1="71" y1="71" x2="409" y2="409" stroke="currentColor" stroke-width="0.7"/>
+      <line x1="409" y1="71" x2="71" y2="409" stroke="currentColor" stroke-width="0.7"/>
+      <line x1="240" y1="2" x2="71" y2="409" stroke="currentColor" stroke-width="0.4"/>
+      <line x1="240" y1="2" x2="409" y2="409" stroke="currentColor" stroke-width="0.4"/>
+      <line x1="2" y1="150" x2="478" y2="330" stroke="currentColor" stroke-width="0.4"/>
+      <line x1="2" y1="330" x2="478" y2="150" stroke="currentColor" stroke-width="0.4"/>
+    </svg>
+  </div>
+
+  <div class="hero-eyebrow">神社の縁側で、世代を超えて</div>
+  <h1>知恵を、受け取りに来ませんか。
+    <span class="h1-en">A GATHERING OF WISDOM ACROSS GENERATIONS</span>
+  </h1>
+  <p class="hero-body">知識は古くなる。知恵は、時代を超える。<br>毎月一度、地域の神社に集い、年配者と若者が<br>抽象的な問いをともに語り合う場です。</p>
+</div>
+
+<section>
+  <div class="section-label">なぜ知恵が重要か</div>
+  <h2>情報があふれる時代に、<br>私たちが失ったもの。</h2>
+  <p class="body-text">知識は本で学べます。しかし知恵は、人からしか受け取れません。異なる時代を生きた人間が同じ問いに向き合うとき、そこには言葉にならない何かが伝わります。それは答えではなく、問いへの向き合い方です。</p>
+  <div class="split">
+    <div class="split-block">
+      <div class="split-num">知識とは</div>
+      <div class="split-title">蓄積され、更新される情報</div>
+      <div class="split-body">時代とともに古くなる。本やネットで手に入る。誰でも同じものを受け取れる。</div>
+    </div>
+    <div class="split-block">
+      <div class="split-num">知恵とは</div>
+      <div class="split-title">経験から生まれた人間の結晶</div>
+      <div class="split-body">時代を超えて生き続ける。人からしか受け取れない。場と関係性の中にのみ宿る。</div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="full-inner">
+    <div class="section-label">なぜお年寄りと若者なのか</div>
+    <h2>異なる時代を生きた人間が、<br>同じ問いに向き合うとき。</h2>
+    <p class="body-text">年配者の経験は若者の羅針盤になり、若者の問いは年配者の人生を改めて照らし出します。世代を超えた対話の中にこそ、一人では辿り着けない深さがあります。</p>
+    <div class="flow">
+      <div class="flow-item">
+        <div class="flow-num">01</div>
+        <div class="flow-title">年配者にとって</div>
+        <div class="flow-body">自らの人生の意味を若い世代と共に問い直す場になります</div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-num">02</div>
+        <div class="flow-title">若者にとって</div>
+        <div class="flow-body">30年後の自分への問いを、今ここで受け取ることができます</div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-num">03</div>
+        <div class="flow-title">地域にとって</div>
+        <div class="flow-body">見えないけれど確かにある人と人の紐帯が戻ってきます</div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-num">04</div>
+        <div class="flow-title">神社にとって</div>
+        <div class="flow-body">地域の魂の中心としての本来の役割が蘇ります</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-label">話すテーマについて</div>
+  <h2>具体ではなく、抽象的な問いを。</h2>
+  <p class="body-text">「仕事で後悔したこと」という具体的な問いではなく、「後悔とは何か」という抽象的な問いをテーマにします。抽象が入口になることで、それぞれの人生経験が自然と言葉になります。同じ問いに対して20代と80代では答えが全く違う。その違いそのものが、知恵です。</p>
+  <div class="themes">
+    <span class="tag">幸せとは何か</span>
+    <span class="tag">許すとはどういうことか</span>
+    <span class="tag">歳をとるとは何か</span>
+    <span class="tag">孤独と一人は違うか</span>
+    <span class="tag">人はなぜ争うのか</span>
+    <span class="tag">自分らしさとは何か</span>
+    <span class="tag">死をどう考えるか</span>
+    <span class="tag">変わることと変わらないこと</span>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="full-inner">
+    <div class="section-label">参加について</div>
+    <h2>参加費はお賽銭。<br>集まったお賽銭は、開催神社へ。</h2>
+    <p class="body-text">参加費は定めていません。来られた方が、感謝の気持ちとして境内のお賽銭箱へ。集まったお賽銭はそのまま開催神社に納めます。</p>
+    <div class="saisen-box">
+      <svg class="saisen-icon" width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="10" y="24" width="32" height="24" rx="1" stroke="currentColor" stroke-width="0.8"/>
+        <rect x="15" y="18" width="22" height="8" rx="1" stroke="currentColor" stroke-width="0.8"/>
+        <line x1="26" y1="29" x2="26" y2="44" stroke="currentColor" stroke-width="0.8"/>
+        <line x1="19" y1="36" x2="33" y2="36" stroke="currentColor" stroke-width="0.8"/>
+        <path d="M18 18 C18 12 34 12 34 18" stroke="currentColor" stroke-width="0.8" fill="none"/>
+        <line x1="10" y1="28" x2="42" y2="28" stroke="currentColor" stroke-width="0.5"/>
+      </svg>
+      <div>
+        <div class="saisen-title">お金が場の空気を汚さないために</div>
+        <div class="saisen-body">金額を強制しないことで、経済的な理由で来られない人をつくらない。感謝の表れとして自分で決める。場所を提供してくれる神社に還元することで、お金の流れに一切の濁りがない。場所から生まれ、その場所に還る循環です。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-label">なぜ神社なのか</div>
+  <h2>場所が、対話の深さを<br>決めることがある。</h2>
+  <p class="body-text">神社はもともと、地域の人々が集い、季節を祝い、ともに祈る場所でした。そこには長い時間をかけて積み重なった、地域固有の記憶があります。その場に足を踏み入れるだけで、自然と日常とは少し違う自分になれる。知恵談会を神社で開くのは、その静けさと歴史の重みを借りたいからです。</p>
+
+  <div class="split" style="margin-top:2.5rem">
+    <div class="split-block">
+      <div class="split-num">場の力</div>
+      <div class="split-title">神聖な場で語られる言葉</div>
+      <div class="split-body">古いものへの敬意が自然と生まれる場所で話すとき、言葉はより内省的になる。場所が人の態度をそっと変えてくれる。</div>
+    </div>
+    <div class="split-block">
+      <div class="split-num">神社とともに</div>
+      <div class="split-title">人が集まることで神社も蘇る</div>
+      <div class="split-body">かつて神社は地域の暮らしの中心にありました。人が再び集うことで、その場所に少しずつ息が吹き返す。知恵談会と神社の再生は、一体のものだと考えています。</div>
+    </div>
+  </div>
+</section>
+
+<div class="vision-wrap">
+  <div class="vision-label">最終的なビジョン</div>
+  <div class="vision-jp">
+    かつて神社は、地域の魂の中心でした。<br>
+    人々が集い、問いを持ち寄り、<br>
+    自分の存在と向き合う場所。<br><br>
+    この小さな集まりから、<br>
+    神道を通じて、自然と人間と共同体が<br>
+    再びつながる日本を取り戻したい。
+  </div>
+  <div class="vision-line"></div>
+  <div class="vision-en">
+    NOT A BUSINESS. NOT AN ORGANIZATION.<br>
+    JUST PEOPLE, A SHRINE, AND A QUESTION.
+  </div>
+</div>
+
+<section>
+  <div class="section-label">この活動の根底にあるもの</div>
+  <h2>求められているのは、<br>日本人が忘れていた「和」ではないか。</h2>
+  <p class="body-text">多様性、共生、差別——これらの言葉は今、制度や政策の文脈で語られることがほとんどです。しかし、どれだけ構造を変えても、一人一人の心に余裕がなければ、本当の共生は生まれません。心に余裕のある人間は、自分と違うものを面白いと思える。余裕のない人間は、それを脅威として感じてしまう。</p>
+
+  <div class="split" style="margin-top:2.5rem">
+    <div class="split-block">
+      <div class="split-num">道徳心という根っこ</div>
+      <div class="split-title">制度ではなく、心の問題</div>
+      <div class="split-body">外国人が増える時代の変化に戸惑う人がいる中、政府や構造への期待より先に必要なのは、この社会を構成する一人一人の内側にある道徳心ではないでしょうか。</div>
+    </div>
+    <div class="split-block">
+      <div class="split-num">和とは何か</div>
+      <div class="split-title">異なるものが異なるまま調和する</div>
+      <div class="split-body">「和」は均質化ではありません。異なるものが異なるまま、ともにある状態です。自分の根っこに深く根ざした人間ほど、他の文化に触れても揺らがず、むしろ面白がれる。</div>
+    </div>
+  </div>
+
+  <div class="saisen-box" style="margin-top:2.5rem">
+    <svg class="saisen-icon" width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="26" cy="26" r="22" stroke="currentColor" stroke-width="0.8"/>
+      <circle cx="26" cy="26" r="12" stroke="currentColor" stroke-width="0.8"/>
+      <circle cx="26" cy="26" r="4" stroke="currentColor" stroke-width="0.8"/>
+      <line x1="26" y1="4" x2="26" y2="48" stroke="currentColor" stroke-width="0.6"/>
+      <line x1="4" y1="26" x2="48" y2="26" stroke="currentColor" stroke-width="0.6"/>
+      <line x1="10" y1="10" x2="42" y2="42" stroke="currentColor" stroke-width="0.4"/>
+      <line x1="42" y1="10" x2="10" y2="42" stroke="currentColor" stroke-width="0.4"/>
+    </svg>
+    <div>
+      <div class="saisen-title">知恵談会が目指す、小さな和</div>
+      <div class="saisen-body">政策でも運動でもなく、ただ人が集まって話す。その積み重ねが心の余裕を生み、余裕が和を生む。知恵談会はその最も小さな、しかし最も直接的な一歩です。日本人が今本当に求めているのは、新しい仕組みではなく、忘れていた心のつながりではないでしょうか。</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-label">大切にしていること</div>
+  <h2>誰のものでもなく、<br>みんなのもの。</h2>
+  <p class="body-text">知恵談会は特定の個人や団体のものではありません。始めた人間が去っても続く仕組みを、最初から設計します。</p>
+  <div class="rules">
+    <div class="rule-item">
+      <span class="rule-num">一</span>
+      <span class="rule-text">参加費は取らない。お賽銭として開催神社に納める</span>
+    </div>
+    <div class="rule-item">
+      <span class="rule-num">二</span>
+      <span class="rule-text">特定の思想・宗教団体・商業の宣伝をしない</span>
+    </div>
+    <div class="rule-item">
+      <span class="rule-num">三</span>
+      <span class="rule-text">ファシリテーターは持ち回りにし、権力を集中させない</span>
+    </div>
+    <div class="rule-item">
+      <span class="rule-num">四</span>
+      <span class="rule-text">誰かが所有・管理を主張した時点でその人は運営から外れる</span>
+    </div>
+    <div class="rule-item">
+      <span class="rule-num">五</span>
+      <span class="rule-text">各地域の神社と共に、自律・自由に運営する</span>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="full-inner">
+    <div class="section-label">この活動に期待すること</div>
+    <h2>知恵談会は、<br>祭りの前夜祭かもしれない。</h2>
+    <p class="body-text">談話の中で年配者が「昔はこの神社でこういう祭りがあってな」と話す。若者が「やってみたいですね」と言う。その一言から、地域の文化は自然と蘇る。上から復活させるのではなく、人の会話の中から生まれるのが本物の形です。</p>
+
+    <div class="split" style="margin-top:2.5rem">
+      <div class="split-block">
+        <div class="split-num">期待すること</div>
+        <div class="split-title">地域色の復活</div>
+        <div class="split-body">各地域に眠る祭り・行事・慣習が、神社とコミュニティの協力によって自然と息を吹き返す。制度ではなく、人の繋がりから生まれる文化の再生。</div>
+      </div>
+      <div class="split-block">
+        <div class="split-num">なぜ重要か</div>
+        <div class="split-title">地域にしかない固有性を取り戻す</div>
+        <div class="split-body">各地域には、その土地だけの祭り・行事・慣習がある。神社にはその記憶がまだ眠っている。人が集まることで、その種が自然と芽吹いていく。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">知恵談会</div>
+  <div class="footer-text">
+    神社の縁側で、世代を超えて。<br>
+    非営利・非商業・毎月開催<br><br>
+    CHIE DANKAI — Wisdom Gatherings at Local Shrines
+  </div>
+  <a href="mailto:info@chiedankai.jp" class="footer-btn">参加・開催の問い合わせ</a>
+</footer>
+
+</body>
+</html>
